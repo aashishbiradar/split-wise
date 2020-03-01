@@ -1,1 +1,0 @@
-#Simple Split-wise App
