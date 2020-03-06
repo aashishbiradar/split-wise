@@ -3,6 +3,7 @@ import UserCtrl from '../controllers/user';
 
 const router = express.Router();
 
-router.get('/', new UserCtrl().getUser); 
+router.get('/me', new UserCtrl().getUser); 
+router.post('/register', new UserCtrl().register); 
 
 module.exports = router;

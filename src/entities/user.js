@@ -1,10 +1,13 @@
-import UserModel from '../models/user';
+import {UserModel} from '../models/user';
 
 export default class UserEntity {
-
-  async create(user) {
-    const userRecord = await UserModel.create(user);
-    return userRecord;
+  constructor(userData) {
+    this.userData = userData;
+  }
+  async createUser() {
+    console.log(this.userData);
+    const user = new UserModel(this.userData);
+    return await user.save();
   }
   
 }
