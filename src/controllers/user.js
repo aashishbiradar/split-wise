@@ -1,16 +1,23 @@
-import UserEntity from '../entities/user';
-import _ from 'lodash';
+import AuthService from '../services/auth';
 
 export default class UserCtrl {
   register(req,res) {
-    const newUser = _.pick(req.body,['email','password','name','mobile']);
-    const userEnt = new UserEntity(newUser);
-    userEnt.createUser()
-      .then(() => {
-        res.send({status:"success" });
+    const newUser = req.body;
+    const auth = new AuthService();
+    auth.register(newUser)
+      .then((result) => {
+        res.send(result);
       });
   }
 
+  login(req,res) {
+    const {email,password} = req.body;
+    const auth = new AuthService();
+    auth.login(email,password)
+      .then((result) => {
+        res.send(result);
+      });
+  }
   getUser(req,res) {
     res.send({user : "ramu"});
   }
