@@ -2,9 +2,11 @@ import express from 'express';
 import UserCtrl from '../controllers/user';
 
 const router = express.Router();
+const userCrtl = new UserCtrl();
+const {authenticate} = userCrtl;
 
-router.get('/me', new UserCtrl().getUser); 
-router.post('/register', new UserCtrl().register);
-router.post('/login', new UserCtrl().login);
+router.get('/me', authenticate, userCrtl.me); 
+router.post('/register', userCrtl.register);
+router.post('/login', userCrtl.login);
 
-export default router;
+module.exports = router;
