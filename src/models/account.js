@@ -35,4 +35,4 @@ AccountSchema.pre('save', function(next){
     next();
 });
 
-export default mongoose.model('Accounts', TxnSchema);
+export default mongoose.model('Accounts', AccountSchema);

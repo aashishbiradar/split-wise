@@ -39,7 +39,7 @@ export default class AuthService {
         const signature = 'STARKS_JWT_SIGNATURE';//TODO get from env
         const expiration = '6h';
     
-        return jwt.sign({ data, }, signature, { expiresIn: expiration }).toString();
+        return jwt.sign({ data }, signature, { expiresIn: expiration }).toString();
     }
 
     async authenticate(token) {

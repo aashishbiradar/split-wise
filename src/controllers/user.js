@@ -1,4 +1,5 @@
 import AuthService from '../services/auth';
+import UserService from '../services/user';
 import { TokenExpiredError } from 'jsonwebtoken';
 
 export default class UserCtrl {
@@ -13,7 +14,11 @@ export default class UserCtrl {
       .end();
     })
     .catch(e => {
-      res.status(400).send({ error: e.message }).end();
+      console.log(e);
+      res
+      .status(400)
+      .send({ error: e.message })
+      .end();
     });
   }
 
@@ -63,5 +68,47 @@ export default class UserCtrl {
     .status(200)
     .send({user})
     .end();
+  }
+
+  getUser(req,res) {
+    const { email } = req.body;
+    const userService = new UserService();
+    
+    userService.getUser(email)
+    .then(user => {
+      res
+      .status(200)
+      .send({user})
+      .end();
+    })
+    .catch(e => {
+      console.log(e);
+      res
+      .status(401)
+      .send(e.message)
+      .end();
+    });
+  }
+
+  addFriend(req,res) {
+    const { user } = req;
+    const { email } = req.body;
+    const userService = new UserService();
+    
+    userService.getUser(email)
+    .then(friend => userService.addFriend(user._id,friend._id))
+    .then(result => {
+      res
+      .status(200)
+      .send({result})
+      .end();
+    })
+    .catch(e => {
+      console.log(e);
+      res
+      .status(401)
+      .send(e.message)
+      .end();
+    });
   }
 }
