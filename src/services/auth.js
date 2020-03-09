@@ -44,9 +44,8 @@ export default class AuthService {
 
     async authenticate(token) {
         const signature = 'STARKS_JWT_SIGNATURE';
-        const decodedToken = jwt.verify(token,signature);
-        console.log(decodedToken);
-        const user = await UserModel.findById(decodedToken.data._id);
+        const {data} = jwt.verify(token,signature);
+        const user = await UserModel.findById(data._id);
         if(!user) {
             throw new Error('invalid user');
         }
