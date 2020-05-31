@@ -6,7 +6,7 @@ const options = {
     useCreateIndex: true
 };
 
-mongoose.connect('mongodb://localhost/test', options);
+mongoose.connect('mongodb://localhost/splitwise', options);
 
 mongoose.connection.on("open", (ref) => {
     console.log("Connected to mongo server.");

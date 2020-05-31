@@ -5,6 +5,7 @@ import { TokenExpiredError } from 'jsonwebtoken';
 export default class UserCtrl {
   register(req,res) {
     const newUser = req.body;
+    console.log(newUser);
     const auth = new AuthService();
     auth.register(newUser)
     .then((result) => {
@@ -96,7 +97,7 @@ export default class UserCtrl {
     const userService = new UserService();
     
     userService.getUser(email)
-    .then(friend => userService.addFriend(user._id,friend._id))
+    .then(friend => userService.addFriend(user, friend))
     .then(result => {
       res
       .status(200)
