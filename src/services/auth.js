@@ -27,7 +27,7 @@ export default class AuthService {
         const user = _.pick(userRecord,['_id','email','name'])
 
         const token = this.generateToken(userRecord);
-        return {token,user};
+        return { token, user };
     }
 
     generateToken(user) {

@@ -26,14 +26,11 @@ export default class UserCtrl {
   login(req,res) {
     const { email, password } = req.body;
     const auth = new AuthService();
-   
-    auth.login(email,password)
+    auth.login(email, password)
    .then(result => {
-      const {user} = result;
       res
-      .header('x-auth',result.token)
       .status(200)
-      .send({user})
+      .send(result)
       .end();
     })
     .catch(e => {
